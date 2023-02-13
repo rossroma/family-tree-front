@@ -4,6 +4,11 @@ on:
   push:
     branches: main # main 分支提交时触发
 
+# 取消正在进行中的工作流
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest # 运行环境
@@ -38,11 +43,10 @@ jobs:
         run: npm run build:prod
 
       - name: deploy file to server
-        uses: wlixcc/SFTP-Deploy-Action@v1.0 # 使用 SFTP 协议上传到服务器
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4 # 使用 SFTP 协议上传到服务器
         with:
           username: 'root'
           server: '${{ secrets.SERVER_HOST }}'
           ssh_private_key: '${{ secrets.ACCESS_TOKEN }}'
           local_path: './dist/*'
           remote_path: '/home/webroot/family-tree-front/'
-          args: "-o ConnectTimeout=5"
