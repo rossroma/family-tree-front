@@ -34,7 +34,7 @@ jobs:
         name: Install Dependencies
         run: npm install
 
-      - build: Build
+      - name: Build
         run: npm run build:prod
 
       - name: deploy file to server
