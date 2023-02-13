@@ -1,0 +1,116 @@
+.item-tooltip * {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.item-tooltip {
+  font-size: 12px;
+}
+
+.item-tooltip .title {
+  height: 40px;
+  line-height: 40px;
+  clear: both;
+  overflow: hidden;
+}
+
+.item-tooltip .title .era {
+  font-weight: 700;
+  color: #00468e;
+  float: left;
+  width: 80px;
+}
+
+.item-tooltip .title .name {
+  font-weight: 400;
+  float: left;
+  width: 100px;
+  line-height: 32px;
+}
+
+.item-tooltip .title .name strong {
+  font-size: 26px;
+  color: #000;
+  margin-left: 5px;
+}
+
+.item-tooltip .title .bad {
+  color: #298636;
+  font-weight: 400;
+  float: right;
+  width: 110px;
+}
+
+.item-tooltip .wives {
+  padding-left: 80px;
+}
+
+.item-tooltip .wives .item {
+  line-height: 20px;
+  color: #c00;
+}
+
+.item-tooltip .sub-title {
+  font-weight: 400;
+  font-size: 12px;
+  height: 22px;
+  line-height: 22px;
+  margin: 10px 0;
+  color: #986a00;
+}
+
+.item-tooltip .sub-title .courtesy {
+  float: left;
+  width: 80px;
+}
+
+.item-tooltip .children {
+  list-style: none;
+  overflow: hidden;
+}
+
+.item-tooltip .children .sons {
+  width: 80px;
+  float: left;
+  color: #39f;
+}
+
+.item-tooltip .children .daughters {
+  color: #ff6fa0;
+  float: left;
+}
+
+.item-tooltip .children ul li {
+  line-height: 20px;
+}
+
+.item-tooltip .memo {
+  margin-top: 10px;
+  line-height: 20px;
+  color: #777;
+}
+
+.item-tooltip .edit {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  display: none;
+  border: solid 1px #409EFF;
+  background-color: #409EFF;
+  color: #fff;
+  border-radius: 2px;
+  cursor: pointer;
+  padding: 1px 4px;
+}
+.item-tooltip:hover .edit {
+  display: block;
+}
+.item-tooltip .edit:hover {
+  border: solid 1px #66b1ff;
+  background-color: #66b1ff;
+}
+.item-tooltip .edit:active {
+  border: solid 1px #3a8ee6;
+  background-color: #3a8ee6;
+}
