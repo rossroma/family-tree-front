@@ -91,20 +91,38 @@
   color: #777;
 }
 
-.item-tooltip .edit {
+.item-tooltip .btn {
   position: absolute;
   right: 5px;
   top: 5px;
   display: none;
-  border: solid 1px #409EFF;
-  background-color: #409EFF;
   color: #fff;
   border-radius: 2px;
   cursor: pointer;
   padding: 1px 4px;
 }
-.item-tooltip:hover .edit {
+
+.item-tooltip:hover .btn {
   display: block;
+}
+
+.item-tooltip .add {
+  top: 30px;
+  border: solid 1px #67c23a;
+  background-color: #67c23a;
+}
+.item-tooltip .add:hover {
+  border: solid 1px #85ce61;
+  background-color: #85ce61;
+}
+.item-tooltip .add:active {
+  border: solid 1px #5daf34;
+  background-color: #5daf34;
+}
+
+.item-tooltip .edit {
+  border: solid 1px #409EFF;
+  background-color: #409EFF;
 }
 .item-tooltip .edit:hover {
   border: solid 1px #66b1ff;

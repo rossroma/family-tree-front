@@ -1,7 +1,7 @@
 <template>
   <ul class="tree-node" :class="{ single: list.length === 1 }">
     <li v-for="item in list" :key="item.id">
-      <span :data-id="item.id">{{ item.name }}</span>
+      <span :data-id="item.id" class="node-item">{{ item.name }}</span>
       <Treenode
         v-if="!!item.children.length && item.generation < generation"
         :list="item.children"
@@ -28,31 +28,6 @@ export default {
     generation: {
       type: Number,
       required: true
-    }
-  },
-
-  methods: {
-    handleMouseover(e, { id, children }) {
-    },
-
-    handleMouseout(id) {
-      const dialog = document.querySelector('.detail-dialog')
-      if (dialog) {
-        dialog.style.display = 'none'
-      }
-    },
-
-    appendToBody(html, { pageX, pageY }) {
-      let dialog = document.querySelector('.detail-dialog')
-      if (!dialog) {
-        dialog = document.createElement('div')
-        dialog.setAttribute('class', `detail-dialog`)
-        dialog.setAttribute('style', `display:none`)
-        document.body.appendChild(dialog)
-      }
-      dialog.innerHTML = html
-      dialog.setAttribute('style', `left:${pageX}px;top:${pageY}px`)
-      console.log(html)
     }
   }
 

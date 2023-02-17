@@ -9,17 +9,18 @@ import * as echarts from 'echarts'
 import { getTreeList, getItem } from '@/api/table'
 import { formatterHtml, colors, colorType } from '@/views/mobile/shared'
 import { getToken } from '@/utils/auth' // get token from cookie
+import { handleEvent } from './shared'
 
 let timer = null
 export default {
 
   mounted() {
     this.init()
-    document.addEventListener('click', this.handleEdit)
+    document.addEventListener('click', handleEvent)
   },
 
   beforeDestroy() {
-    document.removeEventListener('click', this.handleEdit)
+    document.removeEventListener('click', handleEvent)
   },
 
   methods: {
@@ -33,7 +34,7 @@ export default {
         toolbox: {
           show: true,
           top: '4px',
-          right: '200px',
+          right: '290px',
           itemSize: 24,
           feature: {
             restore: {
@@ -152,12 +153,6 @@ export default {
         }
         return item
       })
-    },
-
-    handleEdit(el) {
-      if (el && el.target.dataset.id) {
-        window.open(`/#/admin/edit?id=${el.target.dataset.id}`)
-      }
     }
   }
 }

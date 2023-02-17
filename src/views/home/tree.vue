@@ -15,9 +15,14 @@
 <script>
 import { getTreeList, getItem } from '@/api/table'
 import { formatterHtml } from '@/views/mobile/shared'
+import { sleep } from '@/utils'
+import { getToken } from '@/utils/auth' // get token from cookie
+import { handleEvent } from './shared'
 import Treenode from './components/tree-node.vue'
 import 'public/static/jquery.nouislider.all.min.js'
 import 'public/static/jquery.nouislider.min.css'
+import jBox from 'jbox'
+import 'jbox/dist/jBox.all.css'
 
 export default {
   name: 'Tree',
@@ -52,6 +57,11 @@ export default {
 
   mounted() {
     this.init()
+    document.addEventListener('click', handleEvent)
+  },
+
+  beforeDestroy() {
+    document.removeEventListener('click', handleEvent)
   },
 
   methods: {
@@ -110,41 +120,31 @@ export default {
       })
     },
 
-    bindEvent() {
-      setTimeout(() => {
-        $('.tree-node li span').hover((e) => {
-          const { currentTarget } = e
-          const { id } = currentTarget.dataset
+    async bindEvent() {
+      const that = this
+      await sleep(300)
 
-          getItem({ id })
-            .then(({ result }) => {
-              const children = this.originData
-                .filter(item => item.parentId === parseInt(id))
-              const data = { ...result, sons: children }
-              this.appendToBody(formatterHtml(data, this.originData), e)
-            })
-        },
-        () => {
-          $('.detail-dialog').fadeOut(300)
-        })
-      }, 300)
+      // eslint-disable-next-line new-cap
+      new jBox('Tooltip', {
+        attach: '.node-item',
+        width: 300,
+        minHeight: 100,
+        delayOpen: 100,
+        closeOnMouseleave: true,
+        async onOpen() {
+          const { id } = this.target[0].dataset
+          const formated = await that.getItemHtml(id)
+          this.setContent(formated)
+        }
+      })
     },
 
-    appendToBody(html, { pageX, offsetX, pageY, offsetY }) {
-      let dialog = document.querySelector('.detail-dialog')
-      if (!dialog) {
-        dialog = document.createElement('div')
-        dialog.setAttribute('class', `detail-dialog`)
-        dialog.setAttribute('style', `display:none`)
-        document.body.appendChild(dialog)
-      }
-      dialog.innerHTML = html
-      const pageWidth = document.body.offsetWidth
-      const top = pageY - offsetY
-      const left = pageX - offsetX
-      const leftWith = (pageWidth - left) > 360 ? left + 30 : left - 330
-      dialog.setAttribute('style', `left:${leftWith}px;top:${top + 20}px`)
-      $('.detail-dialog').fadeTo(300)
+    async getItemHtml(id) {
+      const { result } = await getItem({ id })
+      const children = this.originData
+        .filter(item => item.parentId === parseInt(id))
+      const data = { ...result, sons: children }
+      return formatterHtml(data, this.originData, !!getToken())
     },
 
     initSlider() {
@@ -216,15 +216,6 @@ export default {
 </style>
 
 <style>
-  .detail-dialog {
-    position: absolute;
-    width: 320px;
-    background: #FFFDE7;
-    box-shadow: 0 2px 4px #ccc;
-    border: solid 1px #ccc;
-    border-radius: 5px;
-    padding: 10px;
-  }
   .noUi-origin {
     background: none repeat scroll 0 0 #fafafa;
   }

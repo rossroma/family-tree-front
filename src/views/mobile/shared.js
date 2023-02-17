@@ -97,7 +97,10 @@ export const formatterHtml = (detail, dataList, isEdit) => {
   }
   const editButton = (isEdit) => {
     if (!isEdit) return ''
-    return `<button class="edit" data-id="${id}">编辑</button>`
+    return `
+    <button class="btn edit" data-type="edit" data-id="${id}">编辑</button>
+    <button class="btn add" data-type="add" data-id="${id}" data-generation="${generation}">新建</button>
+    `
   }
   const renderMemo = (text) => {
     if (!text) return ''

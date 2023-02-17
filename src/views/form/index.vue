@@ -221,7 +221,7 @@ export default {
       this.form = {
         ...this.form,
         parentId,
-        generation: generation + 1
+        generation: parseInt(generation) + 1
       }
     },
     onSubmit(formName) {
