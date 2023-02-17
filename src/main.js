@@ -13,9 +13,10 @@ import '@/permission' // permission control
 import { Form, FormItem, Input, Select, Option, Button, ButtonGroup, Divider,
   Dropdown, DropdownMenu, DropdownItem, Menu, MenuItem, Submenu,
   Table, TableColumn, Popover, Pagination,
-  Breadcrumb, BreadcrumbItem, Dialog, Slider
+  Breadcrumb, BreadcrumbItem, Dialog, Slider, Scrollbar, Link, Loading
 } from 'element-ui'
 
+Vue.use(Scrollbar)
 Vue.use(Button)
 Vue.use(ButtonGroup)
 Vue.use(Select)
@@ -38,6 +39,8 @@ Vue.use(Dialog)
 Vue.use(Popover)
 Vue.use(Pagination)
 Vue.use(FormItem)
+Vue.use(Link)
+Vue.use(Loading)
 
 /** Pagination
  * If you don't want to use mock-server
