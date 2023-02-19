@@ -162,7 +162,7 @@
         <el-button type="text" icon="el-icon-plus" @click="addDaughter">添加</el-button>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit('form')">保存</el-button>
+        <el-button type="primary" :disabled="isLoading" @click="onSubmit('form')">保存</el-button>
         <el-button @click="goBack">取消</el-button>
       </el-form-item>
     </el-form>
@@ -171,6 +171,7 @@
 
 <script>
 import { getItem, updateItem, createItem } from '@/api/table'
+import { Message } from 'element-ui'
 export default {
   data() {
     return {
@@ -181,7 +182,8 @@ export default {
         parentId: null,
         memo: '',
         daughters: [],
-        wives: []
+        wives: [],
+        isLoading: false
       },
       father: {},
       formRules: {
@@ -232,26 +234,30 @@ export default {
           }
           return this.handleCreate()
         }
-        this.$message({
+        Message({
           message: '表单校验不通过!',
           type: 'error'
         })
       })
     },
     handleCreate() {
+      this.isLoading = true
       createItem(this.form)
         .then(res => {
-          this.$message({
+          Message({
             message: '添加成功!',
             type: 'success'
           })
           this.goBack()
         })
+        .finally(() => {
+          this.isLoading = false
+        })
     },
     handleUpdate() {
       updateItem(this.form)
         .then(res => {
-          this.$message({
+          Message({
             message: '更新成功!',
             type: 'success'
           })
@@ -259,7 +265,11 @@ export default {
         })
     },
     goBack() {
-      this.$router.go(-1)
+      if (window.history.length > 1) {
+        this.$router.go(-1)
+      } else {
+        this.$router.push('/admin/table')
+      }
     },
 
     addWife(index) {
