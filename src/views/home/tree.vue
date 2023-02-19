@@ -15,7 +15,7 @@
 <script>
 import { getTreeList, getItem } from '@/api/table'
 import { formatterHtml } from '@/views/mobile/shared'
-import { sleep } from '@/utils'
+import { sleep, debounce } from '@/utils'
 import { getToken } from '@/utils/auth' // get token from cookie
 import { handleEvent } from './shared'
 import Treenode from './components/tree-node.vue'
@@ -45,7 +45,9 @@ export default {
       treeList: [],
       originData: [], // 原始数据
       generation: 25,
-      wrapWidth: 12000
+      wrapWidth: 12000,
+      jbox: null,
+      handleSliderDebounce: () => {}
     }
   },
 
@@ -58,6 +60,7 @@ export default {
   mounted() {
     this.init()
     document.addEventListener('click', handleEvent)
+    this.handleSliderDebounce = debounce(this.handleSlider) // 防抖处理
   },
 
   beforeDestroy() {
@@ -111,21 +114,22 @@ export default {
     },
 
     handleSlider(generation) {
-      this.generation = generation
+      const width = document.querySelector('.tree-node').clientWidth + 100
+      this.wrapWidth = width
 
-      this.wrapWidth = 12000
-      this.$nextTick(() => {
-        const width = document.querySelector('.tree-node').clientWidth + 100
-        this.wrapWidth = width
-      })
+      this.bindEvent()
     },
 
     async bindEvent() {
+      // 先销毁事件绑定，防止重复绑定事件
+      if (this.jbox) {
+        this.jbox.destroy()
+      }
       const that = this
       await sleep(300)
 
       // eslint-disable-next-line new-cap
-      new jBox('Tooltip', {
+      this.jbox = new jBox('Tooltip', {
         attach: '.node-item',
         width: 300,
         minHeight: 100,
@@ -165,8 +169,10 @@ export default {
       $('#range').on({
         slide() {
           const ran = parseInt($('#range').val())
-          if (ran < 14) { // eraNo的数组长度目前只有10，以后会增加
-            that.handleSlider(ran + 16)
+          if (ran < 14) { // eraNo的数组长度目前只有14，以后会增加
+            that.generation = ran + 16
+            that.wrapWidth = 12000
+            that.handleSliderDebounce(that.generation)
           }
         }
       })

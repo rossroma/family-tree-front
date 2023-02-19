@@ -207,3 +207,25 @@ class Storage {
 }
 
 export const LS = new Storage()
+
+/**
+ * 实现函数的节流（目的是频繁触发中缩减频率）
+ * @param fn {Function} 实际要执行的函数
+ * @param wait {Number} 执行间隔，单位是毫秒(ms)，默认100ms
+ * @return {Function} 可被调用执行的函数
+ */
+
+export function debounce(fn, delay = 300) {
+  // timer 是在闭包中的
+  let timer = null
+
+  return function() {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      fn.apply(this, arguments)
+      timer = null
+    }, delay)
+  }
+}
