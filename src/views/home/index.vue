@@ -11,13 +11,12 @@
 </template>
 
 <script>
-import Introduction from './components/introduction.vue'
 
 export default {
   name: 'Home',
 
   components: {
-    Introduction
+    Introduction: () => import(/* webpackChunkName: "introduction" */ '@/views/home/components/introduction.vue')
   },
 
   data() {

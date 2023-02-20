@@ -27,14 +27,13 @@
 import Swiper from 'swiper'
 import { CurrentIndex, formatterHtml, colors, colorType } from './shared'
 import { getTreeList, getItem } from '@/api/table'
-import Introduction from '@/views/home/components/introduction.vue'
 import 'public/static/swiper-bundle.min.css'
 const initialSlides = [0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 0]
 export default {
   name: 'Mobile',
 
   components: {
-    Introduction
+    Introduction: () => import(/* webpackChunkName: "introduction" */ '@/views/home/components/introduction.vue')
   },
 
   data() {

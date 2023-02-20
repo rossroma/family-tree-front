@@ -33,13 +33,13 @@ import Layout from '@/layout'
 export const constantRoutes = [
   {
     path: '/login',
-    component: () => import('@/views/login/index'),
+    component: () => import(/* webpackChunkName: "login" */ '@/views/login/index'),
     hidden: true
   },
 
   {
     path: '/404',
-    component: () => import('@/views/404'),
+    component: () => import(/* webpackChunkName: "404" */ '@/views/404'),
     hidden: true
   },
 
@@ -52,13 +52,13 @@ export const constantRoutes = [
     children: [{
       path: 'table',
       name: 'Table',
-      component: () => import('@/views/table/index'),
+      component: () => import(/* webpackChunkName: "table" */ '@/views/table/index'),
       meta: { title: '列表', icon: 'table' },
       hidden: true
     }, {
       path: 'edit',
       name: 'Edit',
-      component: () => import('@/views/form/index'),
+      component: () => import(/* webpackChunkName: "edit" */ '@/views/form/index'),
       meta: { title: '编辑', icon: 'form' },
       hidden: true
     }]
@@ -72,20 +72,20 @@ export const constantRoutes = [
     children: [{
       path: 'tree',
       name: 'Tree',
-      component: () => import('@/views/home/tree'),
+      component: () => import(/* webpackChunkName: "tree" */ '@/views/home/tree'),
       meta: { title: '树状图' },
       hidden: true
     }, {
       path: 'sun',
       name: 'Sun',
-      component: () => import('@/views/home/sun'),
+      component: () => import(/* webpackChunkName: "sun" */ '@/views/home/sun'),
       meta: { title: '落日图' },
       hidden: true
     }]
   },
   {
     path: '/mobile',
-    component: () => import('@/views/mobile/index'),
+    component: () => import(/* webpackChunkName: "mobile" */ '@/views/mobile/index'),
     meta: { title: '展示', icon: 'table' },
     hidden: true
   },
