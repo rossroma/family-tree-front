@@ -37,7 +37,15 @@ jobs:
         run: echo ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
 
       - name: echo origin condition
-        run: echo steps.cache.outputs.cache-hit != 'true'
+        run: echo steps.cache-npm.outputs.cache-hit != 'true'
+
+      - name: echo origin if
+        if: steps.cache-npm.outputs.cache-hit != 'true'
+        run: echo '123'
+
+      - name: echo if
+        if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+        run: echo '123'
 
       - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
