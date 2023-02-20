@@ -33,18 +33,15 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
+      - name: echo origin condition
+        run: steps.cache.outputs.cache-hit != 'true'
+
+      - name: echo origin
+        run: steps.cache.outputs.cache-hit
+
+      - name: echo varibal
+        run: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+
       - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
-
-      - name: Build
-        run: npm run build:prod
-
-      - name: deploy file to server
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.4 # 使用 SFTP 协议上传到服务器
-        with:
-          username: 'root'
-          server: '${{ secrets.SERVER_HOST }}'
-          ssh_private_key: '${{ secrets.ACCESS_TOKEN }}'
-          local_path: './dist/*'
-          remote_path: '/home/webroot/family-tree-front/'
