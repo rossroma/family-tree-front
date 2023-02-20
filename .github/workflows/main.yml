@@ -2,7 +2,7 @@ name: release
 
 on:
   push:
-    branches: main # main 分支提交时触发
+    branches: dev # main 分支提交时触发
 
 # 取消正在进行中的工作流
 concurrency:
