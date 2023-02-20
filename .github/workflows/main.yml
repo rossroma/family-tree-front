@@ -33,13 +33,11 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - name: echo origin condition
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: echo "123"
-
       - name: echo varibal
-        if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        run: echo "4567"
+        run: echo ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
+
+      - name: echo origin condition
+        run: echo steps.cache.outputs.cache-hit != 'true'
 
       - name: Install Dependencies
         if: steps.cache.outputs.cache-hit != 'true'
