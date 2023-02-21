@@ -16,13 +16,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main
 
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
-          node-version: 16
           path: node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
