@@ -16,10 +16,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@main
 
-      - uses: actions/setup-node@v3
-        with:
-          node-version: 16
-          
       - name: Cache node modules
         id: cache-npm
         uses: actions/cache@v3
@@ -33,20 +29,18 @@ jobs:
             ${{ runner.os }}-build-
             ${{ runner.os }}-
 
-      - name: echo varibal
+      - name: echo false
         run: echo ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
 
-      - name: echo origin condition
-        run: echo steps.cache-npm.outputs.cache-hit != 'true'
+      - name: echo true
+        run: echo ${{ steps.cache-npm.outputs.cache-hit == 'true' }}
 
-      - name: echo origin if
-        if: steps.cache-npm.outputs.cache-hit != 'true'
-        run: echo '123'
+      - name: npm list
+        run: npm list
 
-      - name: echo if
-        if: ${{ steps.cache-npm.outputs.cache-hit != 'true' }}
-        run: echo '123'
+      - name: npm version
+        run: npm -v
 
-      - name: Install Dependencies
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
+      - name: node version
+        run: node -v
+
