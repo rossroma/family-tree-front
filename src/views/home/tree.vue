@@ -15,7 +15,7 @@
 <script>
 import { getTreeList, getItem } from '@/api/table'
 import { formatterHtml } from '@/views/mobile/shared'
-import { sleep, debounce } from '@/utils'
+import { sleep, debounce, LS } from '@/utils'
 import { getToken } from '@/utils/auth' // get token from cookie
 import { handleEvent } from './shared'
 import Treenode from './components/tree-node.vue'
@@ -44,7 +44,7 @@ export default {
     return {
       treeList: [],
       originData: [], // 原始数据
-      generation: 25,
+      generation: parseInt(LS.get('generation')) || 25,
       wrapWidth: 12000,
       jbox: null,
       handleSliderDebounce: () => {}
@@ -173,6 +173,7 @@ export default {
             that.generation = ran + 16
             that.wrapWidth = 12000
             that.handleSliderDebounce(that.generation)
+            LS.set('generation', that.generation)
           }
         }
       })
