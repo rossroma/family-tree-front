@@ -155,7 +155,7 @@ export default {
       const that = this
       // 左侧滑块的载入
       $('#range').noUiSlider({
-        start: [9],
+        start: [this.generation - 16],
         step: 1,
         orientation: 'vertical',
         range: {
