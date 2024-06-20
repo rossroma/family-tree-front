@@ -19,7 +19,7 @@
         }
       }
 
-      if (isMobile()) {
+      if (isMobile() && window.location.pathname !== "/mobile") {
         window.location.href = "/mobile";
       }
     </script>
