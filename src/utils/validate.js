@@ -15,6 +15,6 @@ export function isExternal(path) {
  * @returns {Boolean}
  */
 export function validUsername(str) {
-  const valid_map = ['admin', 'editor']
-  return valid_map.indexOf(str.trim()) >= 0
+  // 长度不小于4位，且不得包含特殊字符
+  return str.match(/^[a-zA-Z0-9_-]{4,16}$/)
 }

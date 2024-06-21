@@ -33,12 +33,14 @@ import Layout from '@/layout'
 export const constantRoutes = [
   {
     path: '/login',
+    name: 'Login',
     component: () => import(/* webpackChunkName: "login" */ '@/views/login/index'),
     hidden: true
   },
 
   {
     path: '/404',
+    name: '404',
     component: () => import(/* webpackChunkName: "404" */ '@/views/404'),
     hidden: true
   },
@@ -47,21 +49,34 @@ export const constantRoutes = [
     path: '/admin',
     component: Layout,
     redirect: '/admin/table',
-    name: 'Table',
-    meta: { title: '家谱管理', icon: 'example' },
-    children: [{
-      path: 'table',
-      name: 'Table',
-      component: () => import(/* webpackChunkName: "table" */ '@/views/table/index'),
-      meta: { title: '列表', icon: 'table' },
-      hidden: true
-    }, {
-      path: 'edit',
-      name: 'Edit',
-      component: () => import(/* webpackChunkName: "edit" */ '@/views/form/index'),
-      meta: { title: '编辑', icon: 'form' },
-      hidden: true
-    }]
+    meta: { title: '管理后台', icon: 'table' },
+    children: [
+      {
+        path: '/admin/table',
+        name: 'Table',
+        component: () => import(/* webpackChunkName: "table" */ '@/views/table/index'),
+        meta: { title: '家谱管理', icon: 'example' },
+      }, {
+        path: '/admin/edit',
+        name: 'Edit',
+        component: () => import(/* webpackChunkName: "edit" */ '@/views/form/index'),
+        meta: { title: '编辑', icon: 'form' },
+        hidden: true
+      },
+      {
+        path: '/admin/user',
+        component: () => import(/* webpackChunkName: "user" */ '@/views/user/index'),
+        name: 'User',
+        meta: { title: '用户管理', icon: 'user' },
+      },
+      {
+        path: '/admin/userEdit',
+        component: () => import(/* webpackChunkName: "userEdit" */ '@/views/user/components/edit'),
+        name: 'UserEdit',
+        hidden: true,
+        meta: { title: '编辑用户', icon: 'user' },
+      }
+    ]
   },
   {
     path: '/',

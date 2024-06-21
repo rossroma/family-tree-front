@@ -183,8 +183,8 @@ export default {
         memo: '',
         daughters: [],
         wives: [],
-        isLoading: false
       },
+      isLoading: false,
       father: {},
       formRules: {
         givenName: [
