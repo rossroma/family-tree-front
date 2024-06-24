@@ -55,7 +55,7 @@ export const constantRoutes = [
         path: '/admin/table',
         name: 'Table',
         component: () => import(/* webpackChunkName: "table" */ '@/views/table/index'),
-        meta: { title: '家谱管理', icon: 'example' },
+        meta: { title: '家谱管理', icon: 'example' }
       }, {
         path: '/admin/edit',
         name: 'Edit',
@@ -67,14 +67,14 @@ export const constantRoutes = [
         path: '/admin/user',
         component: () => import(/* webpackChunkName: "user" */ '@/views/user/index'),
         name: 'User',
-        meta: { title: '用户管理', icon: 'user' },
+        meta: { title: '用户管理', icon: 'user' }
       },
       {
         path: '/admin/userEdit',
         component: () => import(/* webpackChunkName: "userEdit" */ '@/views/user/components/edit'),
         name: 'UserEdit',
         hidden: true,
-        meta: { title: '编辑用户', icon: 'user' },
+        meta: { title: '编辑用户', icon: 'user' }
       }
     ]
   },

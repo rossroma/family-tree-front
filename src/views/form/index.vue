@@ -182,7 +182,7 @@ export default {
         parentId: null,
         memo: '',
         daughters: [],
-        wives: [],
+        wives: []
       },
       isLoading: false,
       father: {},

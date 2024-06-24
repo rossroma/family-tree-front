@@ -67,7 +67,7 @@ export default {
       listLoading: true,
       total: 0,
       order: null,
-      tableHeight: window.innerHeight - 200,
+      tableHeight: window.innerHeight - 200
     }
   },
   created() {
@@ -77,7 +77,7 @@ export default {
     fetchData() {
       this.listLoading = true
       getUserList({
-        order: this.order,
+        order: this.order
       })
         .then(res => {
           this.list = res.result.rows
@@ -86,10 +86,10 @@ export default {
         })
     },
     handleEdit(row) {
-      this.$router.push({ path: `/admin/userEdit`, query: row})
+      this.$router.push({ path: `/admin/userEdit`, query: row })
     },
     handleCreate() {
-      this.$router.push({ path: `/admin/userEdit`})
+      this.$router.push({ path: `/admin/userEdit` })
     },
 
     handleDelete(id) {
@@ -123,7 +123,7 @@ export default {
         this.order = null
       }
       this.fetchData()
-    },
+    }
   }
 }
 </script>

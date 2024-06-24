@@ -31,18 +31,18 @@ export default {
       form: {
         nickName: null,
         password: null,
-        memo: '',
+        memo: ''
       },
       isLoading: false,
       formRules: {
         username: [
           { required: true, message: '请输入名', trigger: 'blur' },
-          { max: 16, min: 4, message: '长度在 4 到 16 个字符', trigger: 'blur' },
+          { max: 16, min: 4, message: '长度在 4 到 16 个字符', trigger: 'blur' }
         ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' },
-          { max: 200, min: 6, message: '长度在 6 到 16 个字符', trigger: 'blur' },
-        ],
+          { max: 200, min: 6, message: '长度在 6 到 16 个字符', trigger: 'blur' }
+        ]
       }
     }
   },
@@ -54,7 +54,7 @@ export default {
   },
   created() {
     const { id } = this.$route.query
-    if(id) {
+    if (id) {
       this.form = this.$route.query
     }
   },
@@ -103,7 +103,7 @@ export default {
       } else {
         this.$router.push('/admin/user')
       }
-    },
+    }
   }
 }
 </script>
